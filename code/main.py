@@ -7,6 +7,7 @@ url_regex = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=\n]{1,256}\.[a-zA-Z0-9()]{
 
 def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_debug):
     title_for_form = title.replace(' ','+')
+    google_forms_prefilled_link = format_google_forms_prefilled_link(id, title_for_form)
     
     urls_html = '<ul>\n'
     for url in urls:
@@ -72,8 +73,10 @@ def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_de
                 <a href="{link}" target="_blank" class="btn btn-primary my-2">Original PDF</a>             
                 </p>
             </div>
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfbMV3dHjR6jDpctF5ogz3T9A5ncgJjMLVGx4cgOY3jITLZEg/viewform?embedded=true&usp=pp_url&entry.1767549064={id}&entry.54369149={title_for_form}" width="700" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <iframe src="{google_forms_prefilled_link}" width="700" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             </div>
+
+            
             
          </section>
         
@@ -92,6 +95,12 @@ def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_de
         </html>
     '''
     return html_template
+
+def format_google_forms_prefilled_link(_id, _title):
+    # Google Form - Long Version:
+    #return f'https://docs.google.com/forms/d/e/1FAIpQLSfbMV3dHjR6jDpctF5ogz3T9A5ncgJjMLVGx4cgOY3jITLZEg/viewform?embedded=true&usp=pp_url&entry.1767549064={_id}&entry.54369149={_title}"'
+    # Google Form - Short Version:
+    return f'https://docs.google.com/forms/d/e/1FAIpQLSeeNTTMW8wbwNWr8AYITCU_78yFpR5Uyn0YRZG9iOcisxUCzw/viewform?usp=pp_url&entry.702570504={_id}&entry.1715562253={_title}'
 
 def process_bib_file_to_html(nime_file):
     print(f"Going to load: {nime_file}, hope that's ok.")
@@ -150,7 +159,7 @@ def debug_template():
     author = 'Cory Champion and Mo H Zareei'
     abstract = 'Many common and popular sound spatialisation techniques and methods rely on listeners being positioned in a "sweet-spot" for an optimal listening position in a circle of speakers. This paper discusses a stochastic spatialisation method and its first iteration as implemented for the exhibition Hot Pocket at The Museum of Contemporary Art in Oslo in 2017. This method is implemented in Max and offers a matrix-based amplitude panning methodology which can provide a flexible means for the spatialialisation of sounds.'
     link = 'http://www.nime.org/proceedings/2018/nime2018_paper0007.pdf'
-    output = add_variables(id, title, author, abstract, link, ['url1','url2'],['url1d','url2d'])
+    output = add_variables(id, 6, title, author, abstract, link, ['url1','url2'],['url1d','url2d'])
     f = open(f"exported_html/debug_{id}.html", "w")
     f.write(output)
     f.close()
@@ -158,4 +167,4 @@ def debug_template():
 for nime in nime_files:
     process_bib_file_to_html(f'bib_files/{nime}')
 
-# debug_template()
+debug_template()
