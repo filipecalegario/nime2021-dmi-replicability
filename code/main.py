@@ -9,15 +9,36 @@ def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_de
     title_for_form = title.replace(' ','+')
     google_forms_prefilled_link = format_google_forms_prefilled_link(id, title_for_form)
     
-    urls_html = '<ul>\n'
-    for url in urls:
-          urls_html += f'                    <li><a href=\"{url}\" target="_blank">{url}</a></li>\n'
-    urls_html += '                </ul>'
+    urls_html = ""
+    urls_html_debug = ""
 
-    urls_html_debug = '<ul class=\"font-monospace collapse\" id=\"debug">\n'
-    for url_d in urls_debug:
-          urls_html_debug += f'                    <li><small>{url_d}</small></li>\n'
-    urls_html_debug += '                </ul>'
+    if len(urls) > 0:
+        urls_html = '<ul>\n'
+        for url in urls:
+            urls_html += f'                    <li><a href=\"{url}\" target="_blank">{url}</a></li>\n'
+        urls_html += '                </ul>'
+
+        urls_html_debug = '''
+        <div class="alert alert-warning" role="alert">
+                <a class="alert-link" data-toggle="collapse" href="#debug" aria-expanded="false" aria-controls="debug">
+                    Debug: if a extracted URL is malformed
+                </a>
+                        <ul class=\"font-monospace collapse\" id=\"debug">\n
+        '''
+        for url_d in urls_debug:
+            urls_html_debug += f'                    <li><small>{url_d}</small></li>\n'
+        urls_html_debug += '''
+                        </ul>
+        </div>
+        '''
+    else:
+        urls_html = '''
+                <div class="alert alert-danger" role="alert">
+                    No URL found in the paper.
+                </div>
+        '''
+
+    
 
     html_template = f'''
         <!doctype html>
@@ -28,7 +49,7 @@ def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_de
             <meta name="description" content="">
             <meta name="author" content="Filipe Calegario, Mark Otto, Jacob Thornton, and Bootstrap contributors">
             <meta name="generator" content="Hugo 0.79.0">
-            <title>Review Page</title>
+            <title>{id} - {title}</title>
 
             <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
@@ -62,12 +83,8 @@ def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_de
                 <p class="text-muted">{abstract}</p>
                 <h4 class="fw-light">Extracted URLs from PDF</h4>
                 {urls_html}
-                <div class="alert alert-warning" role="alert">
-                <a class="alert-link" data-toggle="collapse" href="#debug" aria-expanded="false" aria-controls="debug">
-                    Debug: if a extracted URL is malformed
-                </a>
+           
                 {urls_html_debug}
-                </div>
                 <p>
                 <p>
                 <a href="{link}" target="_blank" class="btn btn-primary my-2">Original PDF</a>             
@@ -159,6 +176,7 @@ def debug_template():
     author = 'Cory Champion and Mo H Zareei'
     abstract = 'Many common and popular sound spatialisation techniques and methods rely on listeners being positioned in a "sweet-spot" for an optimal listening position in a circle of speakers. This paper discusses a stochastic spatialisation method and its first iteration as implemented for the exhibition Hot Pocket at The Museum of Contemporary Art in Oslo in 2017. This method is implemented in Max and offers a matrix-based amplitude panning methodology which can provide a flexible means for the spatialialisation of sounds.'
     link = 'http://www.nime.org/proceedings/2018/nime2018_paper0007.pdf'
+    #output = add_variables(id, 6, title, author, abstract, link, [],['url1d','url2d'])
     output = add_variables(id, 6, title, author, abstract, link, ['url1','url2'],['url1d','url2d'])
     f = open(f"exported_html/debug_{id}.html", "w")
     f.write(output)
