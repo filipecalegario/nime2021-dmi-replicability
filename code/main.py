@@ -1,13 +1,19 @@
 import re
 import bibtexparser
 import fitz
+from os import path
+from glob import glob
 
-nime_files = ["nime2018.bib","nime2019.bib","nime2020.bib"]
+#nime_files = ["nime2018.bib","nime2019.bib","nime2020.bib"]
+#nime_files = []
+nime_files = ["bib_files/nime_papers.bib"]
+#pdf_files_folder_path = "pdf_files"
+pdf_files_folder_path = "/Volumes/SDDMTL/NIME Proceedings/pdf_files"
 url_regex = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=\n]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
 
 def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_debug):
-    title_for_form = title.replace(' ','+')
-    google_forms_prefilled_link = format_google_forms_prefilled_link(id, title_for_form)
+    
+    google_forms_prefilled_link = format_google_forms_prefilled_link(id, title)
     
     urls_html = ""
     urls_html_debug = ""
@@ -93,10 +99,7 @@ def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_de
             <iframe src="{google_forms_prefilled_link}" width="700" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             </div>
 
-            
-            
          </section>
-        
 
         </main>
 
@@ -114,61 +117,78 @@ def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_de
     return html_template
 
 def format_google_forms_prefilled_link(_id, _title):
+    title_for_form = _title.replace(' ','+')
     # Google Form - Long Version:
     #return f'https://docs.google.com/forms/d/e/1FAIpQLSfbMV3dHjR6jDpctF5ogz3T9A5ncgJjMLVGx4cgOY3jITLZEg/viewform?embedded=true&usp=pp_url&entry.1767549064={_id}&entry.54369149={_title}"'
     # Google Form - Short Version:
-    return f'https://docs.google.com/forms/d/e/1FAIpQLSeeNTTMW8wbwNWr8AYITCU_78yFpR5Uyn0YRZG9iOcisxUCzw/viewform?usp=pp_url&entry.702570504={_id}&entry.1715562253={_title}'
+    return f'https://docs.google.com/forms/d/e/1FAIpQLSeeNTTMW8wbwNWr8AYITCU_78yFpR5Uyn0YRZG9iOcisxUCzw/viewform?embedded=true&usp=pp_url&entry.702570504={_id}&entry.1715562253={title_for_form}'
 
-def process_bib_file_to_html(nime_file):
-    print(f"Going to load: {nime_file}, hope that's ok.")
+def process_bib_file_to_html(nime_bib_file, pdf_files_folder_path):
+    print(f"Going to load: {nime_bib_file}, hope that's ok.")
 
-    with open(nime_file) as bibtex_file:
+    with open(nime_bib_file) as bibtex_file:
         bib_database = bibtexparser.bparser.BibTexParser(common_strings=True).parse_file(bibtex_file)
         
     print(f"Loaded {len(bib_database.entries)} entries.")
     review_sheet = []
+    url_joint_sheet = []
     for e in bib_database.entries:
-        print('.',end='')
-        title = e['title']
-        authors = e['author']
-        pdf_file_url = e['url']
-        year = e['year']
-        abstract = e['abstract']
-        local_pdf_file = pdf_file_url.replace('https','http').replace(f'http://www.nime.org/proceedings/{year}/','')
-        id = local_pdf_file.replace('.pdf','')
-        urls = []
-        urls_debug = []
-        quant_pages = ''
-        with fitz.open(f'pdf_files/{year}/{local_pdf_file}') as pdf:
-            text = ""
-            quant_pages += str(len(pdf))
-            for page in pdf:
-                # extract text of each PDF page
-                text += page.getText()
-        # extract all urls using the regular expression
-            for match in re.finditer(url_regex, text):
-                url = match.group()
-                _start = match.start()
-                _end = match.end()
-                url_d = text[_start:_end+100].replace('\n','')
-                #print("[+] URL Found:", url)
-                urls.append(url)
-                urls_debug.append(url_d)
-        output = add_variables(id, quant_pages, title, authors, abstract, pdf_file_url, urls, urls_debug)
-        review_sheet.append(format_review_info(id,title,year))
-        f = open(f"exported_html/{id}.html", "w")
-        f.write(output)
-        f.close()
+        try:
+            title = e['title']
+            authors = e['author']
+            pdf_file_url = e['url']
+            year = e['year']
+            local_pdf_file = pdf_file_url.replace('https','http').replace(f'http://www.nime.org/proceedings/{year}/','')
+            id = local_pdf_file.replace('.pdf','')
+            abstract = ''
+            if 'abstract' in e:
+                abstract = e['abstract']
+            else:
+                print(f'!ERROR: {id} NIME {year}\'s paper: \"{title}\" has no abstract')
+            urls = []
+            urls_debug = []
+            quant_pages = ''
+            with fitz.open(f'{pdf_files_folder_path}/{year}/{local_pdf_file}') as pdf:
+                text = ""
+                quant_pages += str(len(pdf))
+                for page in pdf:
+                    # extract text of each PDF page
+                    text += page.getText()
+            # extract all urls using the regular expression
+                for match in re.finditer(url_regex, text):
+                    url = match.group()
+                    _start = match.start()
+                    _end = match.end()
+                    url_d = text[_start:_end+100].replace('\n','')
+                    #print("[+] URL Found:", url)
+                    urls.append(url)
+                    urls_debug.append(url_d)
+                    url_d_clean = url_d.replace('\"','\'').replace('\n', ' ')
+                    title_clean = title.replace('\"','\'').replace('\n', ' ')
+                    url_joint_sheet.append(','.join([id,url.replace('\n',''),f'\"{url_d_clean}\"',f'\"{title_clean}\"']))
+            output = add_variables(id, quant_pages, title, authors, abstract, pdf_file_url, urls, urls_debug)
+            review_sheet.append(format_review_info(id,title,year,abstract))
+            f = open(f"exported_html/{id}.html", "w")
+            f.write(output)
+            f.close()
+        except:
+            print(f'Error: in {nime_bib_file}')
+    print('')
+    export_list_to_csv(review_sheet, 'review_sheet')
+    export_list_to_csv(url_joint_sheet, 'url_joint_sheet')
 
-    print('')    
+def export_list_to_csv(list, title):
     print('Exporting CSVs')
-    sheet = open('csv_review_sheet/review_sheet.csv', 'a')
-    for line in review_sheet:
+    sheet = open(f'exported_csv/{title}.csv', 'a')
+    for line in list:
         sheet.write(line + '\n')
     sheet.close()
 
-def format_review_info(_id, _title,_year):
-    return f"No,http://www.cin.ufpe.br/~fcac/NIME2021/DMI_Repl/{_id}.html,{_year},\"{_title}\""
+def format_review_info(_id, _title,_year, _abstract):
+    form_link = format_google_forms_prefilled_link(_id,_title).replace('embedded=true&','')
+    processed_abstract = _abstract.replace('\"','\'').replace('\n', ' ')
+    #return f"No,http://www.cin.ufpe.br/~fcac/NIME2021/DMI_Repl/{_id}.html,{_year},{form_link},\"{_title}\",\"{_abstract}\""
+    return f"{_id},{_year},\"{_title}\",\"{processed_abstract}\""
 
 def debug_template():
     id = 'id9999'
@@ -182,7 +202,19 @@ def debug_template():
     f.write(output)
     f.close()
 
-for nime in nime_files:
-    process_bib_file_to_html(f'bib_files/{nime}')
+def find_ext(dir, ext):
+    return glob(path.join(dir,"*.{}".format(ext)))
 
-debug_template()
+bib_files_to_process = []
+
+if len(nime_files) > 0:
+    bib_files_to_process = nime_files
+else:
+    bib_files_to_process = sorted(find_ext('bib_files', 'bib'),reverse=True)
+    print(bib_files_to_process)
+
+for bib in bib_files_to_process:
+    #process_bib_file_to_html(f'bib_files/{bib}',pdf_files_folder_path)
+    process_bib_file_to_html(bib,pdf_files_folder_path)
+
+#debug_template()
