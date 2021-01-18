@@ -4,12 +4,12 @@ import fitz
 from os import path
 from glob import glob
 
-#nime_files = ["nime2018.bib","nime2019.bib","nime2020.bib"]
+nime_files = ["bib_files/nime2018.bib","bib_files/nime2019.bib","bib_files/nime2020.bib"]
 #nime_files = []
-nime_files = ["bib_files/nime_papers.bib"]
-#pdf_files_folder_path = "pdf_files"
-pdf_files_folder_path = "/Volumes/SDDMTL/NIME Proceedings/pdf_files"
-url_regex = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=\n]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
+#nime_files = ["bib_files/nime_papers.bib"]
+pdf_files_folder_path = "pdf_files"
+#pdf_files_folder_path = "/Volumes/SDDMTL/NIME Proceedings/pdf_files"
+url_regex = r"(https?:\/\/)(www\.)?[-a-zA-Z0-9@:%._\+~#=\n]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
 
 def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_debug):
     
