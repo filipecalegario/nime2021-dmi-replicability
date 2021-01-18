@@ -9,7 +9,8 @@ nime_files = ["bib_files/nime2018.bib","bib_files/nime2019.bib","bib_files/nime2
 #nime_files = ["bib_files/nime_papers.bib"]
 pdf_files_folder_path = "pdf_files"
 #pdf_files_folder_path = "/Volumes/SDDMTL/NIME Proceedings/pdf_files"
-url_regex = r"(https?:\/\/)(www\.)?[-a-zA-Z0-9@:%._\+~#=\n]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
+# url_regex = r"(https?:\/\/)(www\.)?[-a-zA-Z0-9@:%._\+~#=\n]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
+url_regex = r"((https?:\/\/www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=\n]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
 
 def add_variables(id, quant_pages, title, authors, abstract, link, urls, urls_debug):
     
@@ -184,6 +185,11 @@ def export_list_to_csv(list, title):
         sheet.write(line + '\n')
     sheet.close()
 
+def clear_csv_file(filename):
+    sheet = open(f'exported_csv/{filename}.csv', 'w')
+    sheet.write('')
+    sheet.close()
+
 def format_review_info(_id, _title,_year, _abstract):
     form_link = format_google_forms_prefilled_link(_id,_title).replace('embedded=true&','')
     processed_abstract = _abstract.replace('\"','\'').replace('\n', ' ')
@@ -204,6 +210,11 @@ def debug_template():
 
 def find_ext(dir, ext):
     return glob(path.join(dir,"*.{}".format(ext)))
+
+# =============== MAIN ==================
+
+clear_csv_file('review_sheet')
+clear_csv_file('url_joint_sheet')
 
 bib_files_to_process = []
 
