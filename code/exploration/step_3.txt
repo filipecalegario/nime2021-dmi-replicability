@@ -1,0 +1,86 @@
+nime2020_paper99	PathoSonic: Performing Sound In Virtual Reality Feature Space
+nime2020_paper98	Composing Popular Music with Physarum polycephalum-based Memristors
+nime2020_paper94	Knotting the memory//Encoding the Khipu_: Reuse of an ancient Andean device as a NIME 
+nime2020_paper91	RAW: Exploring Control Structures for Muscle-based Interaction in Collective Improvisation
+nime2020_paper76	Sonification of High Energy Physics Data Using Live Coding and Web Based Interfaces.
+nime2020_paper71	Intra-Actions: Experiments with Velocity and Position in Continuous Controllers
+nime2020_paper70	Force dynamics as a design framework for mid-air musical interfaces
+nime2020_paper69	On Digital Platforms and AI for Music in the UK and China
+nime2020_paper66	Shaping the behaviour of feedback instruments with complexity-controlled gain dynamics
+nime2020_paper64	Sounding Brush: A Tablet based Musical Instrument for Drawing and Mark Making
+nime2020_paper62	KnittedKeyboard: Digital Knitting of Electronic Textile Musical Controllers
+nime2020_paper6	Piezoelectric strings as a musical interface
+nime2020_paper58	ExSampling: a system for the real-time ensemble performance of field-recorded environmental sounds
+nime2020_paper55	Making Mappings: Examining the Design Process
+nime2020_paper54	Probatio 1.0: collaborative development of a toolkit for functional DMI prototypes
+nime2020_paper52	TorqueTuner: A self contained module for designing rotary haptic force feedback for digital musical instruments
+nime2020_paper51	Supporting Interactive Machine Learning Approaches to Building Musical Instruments in the Browser
+nime2020_paper5	Words to Music Synthesis
+nime2020_paper49	Crowd-driven Music: Interactive and Generative Approaches using Machine Vision and Manhattan
+nime2020_paper43	Analytic vs. holistic approaches for the live search of sound presets using graphical interpolation
+nime2020_paper42	Sculpting the behaviour of the Feedback-Actuated Augmented Bass: Design strategies for subtle manipulations of string feedback using simple adaptive algorithms
+nime2020_paper39	There and Back Again: The Practicality of GPU Accelerated Digital Audio
+nime2020_paper32	Touch Responsive Augmented Violin Interface System II: Integrating Sensors into a 3D Printed Fingerboard
+nime2020_paper30	Curating Perspectives: Incorporating Virtual Reality into Laptop Orchestra Performance
+nime2020_paper29	EXPANDING ACCESS TO MUSIC TECHNOLOGY-  Rapid Prototyping Accessible Instrument Solutions For Musicians With Intellectual Disabilities
+nime2020_paper19	A platform for low-latency continuous keyboard sensing and sound generation
+nime2020_paper16	SnoeSky and SonicDive - Design and Evaluation of Two Accessible Digital Musical Instruments for a SEN School
+nime2020_paper13	All You Need Is LOD : Levels of Detail in Visual Augmentations for the Audience
+nime2020_paper125	BachDuet: A Deep Learning System for Human-Machine Counterpoint Improvisation
+nime2020_paper123	Animation, Sonification, and Fluid-Time: A Visual-Audioizer Prototype
+nime2020_paper121	SOIL CHOIR v.1.3 - soil moisture sonification installation
+nime2020_paper119	The Da ̈ıs: A Haptically Enabled New Interface for Musical Expression for Controlling Physical Models for Sound Synthesis
+nime2020_paper118	The KeyWI: An Expressive and Accessible Electronic Wind Instrument
+nime2020_paper116	Demystifying tabla through the development of an electronic drum
+nime2020_paper114	WELLE - a web-based music environment for the blind
+nime2020_paper103	Interfacing Sounds: Hierarchical Audio-Content Morphologies for Creative Re-purposing in earGram 2.0
+nime2020_paper100	Vodhrán: collaborative design for evolving a physical model and interface into a proto-instrument
+nime2020_paper0	Interactive Mobile Musical Application using faust2smartphone
+nime2020_paper0	Interactive Mobile Musical Application using faust2smartphone
+nime2019_paper085	Augmenting Parametric Synthesis with Learned Timbral Controllers
+nime2019_paper083	Learning from History: Recreating and Repurposing Harriet Padberg's Computer Composed Canon and Free Fugue
+nime2019_paper077	A {MIDI} Controller Mapper for the Built-in Audio Mixer in the Unity Game Engine
+nime2019_paper075	Stellar Command: a planetarium software based cosmic performance interface
+nime2019_paper074	HMusic: A domain specific language for music programming and live coding
+nime2019_paper072	Reach: a keyboard-based gesture recognition system for live piano sound modulation
+nime2019_paper063	{Bendit\_I/O}: A System for Networked Performance of Circuit-Bent Devices
+nime2019_paper060	Adaptive Mapping of Sound Collections for Data-driven Musical Interfaces
+nime2019_paper059	Inspecting and Interacting with Meaningful Music Representations using {VAE}
+nime2019_paper058	Eolos: a wireless {MIDI} wind controller
+nime2019_paper047	{INTIMAL}: Walking to Find Place, Breathing to Feel Presence
+nime2019_paper046	The design of technological interfaces for interactions between music, dance and garment movements
+nime2019_paper045	Perspectives on Time: performance practice, mapping strategies, \
+nime2019_paper040	A Bassline Generation System Based on Sequence-to-Sequence Learning
+nime2019_paper038	Sound Control: Supporting Custom Musical Interface Design for Children with Disabilities
+nime2019_paper036	Designing Gestures for Continuous Sonic Interaction
+nime2019_paper034	{ESMERIL} --- An interactive audio player and composition system for collaborative experimental music netlabels
+nime2019_paper033	{AMIGO}: An Assistive Musical Instrument to Engage, Create and Learn Music
+nime2019_paper029	El mapa no es el territorio: Sensor mapping for audiovisual performances
+nime2019_paper026	The Half-Physler: An oscillating real-time interface to a tube resonator model
+nime2019_paper016	A Physical Intelligent Instrument using Recurrent Neural Networks
+nime2018_paper0089	Fuzzy Logic Control Toolkit 2.0: composing and synthesis by fuzzyfication
+nime2018_paper0088	Neuron-modeled Audio Synthesis: Nonlinear Sound and Control
+nime2018_paper0081	Live Repurposing of Sounds: MIR Explorations with Personal and Crowdsourced Databases
+nime2018_paper0075	A web-based 3D environment for gestural interaction with virtual music instruments as a STEAM education tool
+nime2018_paper0074	Sound Opinions: Creating a Virtual Tool for Sound Art Installations through Sentiment Analysis of Critical Reviews
+nime2018_paper0067	robotcowboy: 10 Years of Wearable Computer Rock
+nime2018_paper0060	Crafting Digital Musical Instruments: An Exploratory Workshop Study
+nime2018_paper0058	The halldorophone: The ongoing innovation of a cello-like drone instrument
+nime2018_paper0056	JythonMusic: An Environment for Developing Interactive Music Systems
+nime2018_paper0055	The Digital Orchestra Toolbox for Max
+nime2018_paper0053	InterFACE: new faces for musical expression
+nime2018_paper0051	CTRL: A Flexible, Precision Interface for Analog Synthesis
+nime2018_paper0050	Playsound.space: Inclusive Free Music Improvisations Using Audio Commons
+nime2018_paper0042	The T-Stick: Maintaining a 12 year-old Digital Musical Instrument
+nime2018_paper0041	Composing an Ensemble Standstill Work for Myo and Bela
+nime2018_paper0032	The Phone with the Flow: Combining Touch   Optical Flow in Mobile Instruments
+nime2018_paper0031	Real-Time Motion Capture Analysis and Music Interaction with the Modosc Descriptor Library
+nime2018_paper0030	Myo Mapper: a Myo armband to OSC mapper
+nime2018_paper0028	Contextualising Idiomatic Gestures in Musical Interactions with NIMEs
+nime2018_paper0024	Chunity: Integrated Audiovisual Programming in Unity
+nime2018_paper0014	Siren: Interface for Pattern Languages
+nime2018_paper0011	The XT Synth: A New Controller for String Players
+nime2018_paper0010	CABOTO: A Graphic-Based Interactive System for Composing and Performing Electronic Music
+nime2018_paper0004	Interacting with Musebots
+nime2018_paper0002	*12*: Mobile Phone-Based Audience Participation in a Chamber Music Performance
+nime2018_paper0001	Working methods and instrument design for cross-adaptive sessions
